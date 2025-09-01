@@ -1,0 +1,95 @@
+<section id="booking-form" class="container my-4">
+    <div class="row g-4">
+        <!-- Seats -->
+        <div class="col-12 col-lg-5">
+            <div class="rb-card p-3 p-md-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="m-0">Select seats</h5>
+                    <div class="legend small d-flex align-items-center gap-3">
+                        <span><span class="dot dot-available"></span>Available</span>
+                        <span><span class="dot dot-selected"></span>Selected</span>
+                        <span><span class="dot dot-reserved"></span>Booked</span>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    @for (seatNo of totalSeats; track $index) {
+                    @if (checkIfSeatBooked(seatNo) !== -1) {
+                    <div class="col-3 col-sm-2 d-flex justify-content-center">
+                        <div class="seat reserved" aria-disabled="true">{{seatNo}}</div>
+                    </div>
+                    } @else {
+                    @if (checkIsSeatSelected(seatNo) !== -1) {
+                    <div class="col-3 col-sm-2 d-flex justify-content-center">
+                        <div class="seat selected" role="button" tabindex="0" (click)="selectSeat(seatNo)"
+                            (keyup.enter)="selectSeat(seatNo)">{{seatNo}}</div>
+                    </div>
+                    } @else {
+                    <div class="col-3 col-sm-2 d-flex justify-content-center">
+                        <div class="seat available" role="button" tabindex="0" (click)="selectSeat(seatNo)"
+                            (keyup.enter)="selectSeat(seatNo)">{{seatNo}}</div>
+                    </div>
+                    }
+                    }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Passengers -->
+        <div class="col-12 col-lg-7">
+            <div class="rb-card p-3 p-md-4">
+                <h5 class="mb-3">Passenger details</h5>
+                @if (userSelectedSeats?.length === 0) {
+                <div class="text-center text-muted py-5">
+                    <i class="bi bi-ticket-perforated fs-1 d-block mb-2"></i>
+                    Select a seat to add passenger details
+                </div>
+                } @else {
+                @for (user of userSelectedSeats; track $index) {
+                <div class="row g-3 align-items-end mb-2">
+                    <div class="col-12 col-sm-5">
+                        <label class="form-label" for="">Passenger name</label>
+                        <input type="text" class="form-control" name="passengerName" [(ngModel)]="user.passengerName"
+                            placeholder="Full name">
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <label class="form-label" for="">Age</label>
+                        <input type="number" min="1" class="form-control" name="age" [(ngModel)]="user.age"
+                            placeholder="Age">
+                    </div>
+                    <div class="col-6 col-sm-4">
+                        <label class="form-label" for="">Gender</label>
+                        <select class="form-select" name="gender" [(ngModel)]="user.gender">
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Fe-Male">Fe-Male</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <label class="form-label" for="">Seat No</label>
+                        <input type="text" class="form-control" [value]="user.seatNo" disabled>
+                    </div>
+                </div>
+                <hr class="my-3">
+                }
+                }
+            </div>
+
+            <div
+                class="booking-bar rb-card mt-3 p-3 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-3">
+                <div class="d-flex align-items-center gap-3">
+                    <span class="fw-semibold">Selected:</span>
+                    <div class="d-flex flex-wrap gap-2">
+                        @for (u of userSelectedSeats; track $index) {
+                        <span class="badge bg-primary-subtle text-primary rb-pill px-3 py-2">Seat {{u.seatNo}}</span>
+                        }
+                    </div>
+                </div>
+                <button class="btn btn-rb rb-pill px-4 book-seat" (click)="bookSeat()">
+                    <i class="bi bi-bag-check"></i> Book now
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

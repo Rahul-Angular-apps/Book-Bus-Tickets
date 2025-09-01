@@ -1,0 +1,131 @@
+<nav class="navbar navbar-expand-lg navbar-rb py-3">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2">
+            <img src="https://s3.rdbuz.com/Images/rdc/rdc-redbus-logo.webp" alt="redbus"
+                style="width:48px;height:auto;">
+            <span class="fw-bold text-danger">red<span class="text-dark">Bus</span></span>
+        </a>
+
+        <button class="navbar-toggler" type="button" (click)="toggleNav()" data-bs-toggle="collapse"
+            data-bs-target="#rbNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" #rbNav id="rbNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2">
+                        <i class="bi bi-bus-front"></i>
+                        Buses
+                    </a>
+                    </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2">
+                        <i class="bi bi-train-front"></i>
+                        Trains
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2">
+                        <i class="bi bi-airplane"></i>
+                        Flights
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2">
+                        <i class="bi bi-building"></i>
+                        Hotels
+                    </a>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+                    <button class="btn btn-ghost rb-pill px-3 d-flex align-items-center gap-2"
+                        (click)="openModal('open')">
+                        <i class="bi bi-person"></i> Login / Sign up
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Auth Modal -->
+<div #modalOverlay class="modal-backdrop fade" style="display: none;"></div>
+<div class="modal fade" id="rbAuth" #modal tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rb-card">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold text-danger">Welcome back</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="openModal('close')"></button>
+            </div>
+            <div class="modal-body">
+                @if (isLoggedIn) {
+                <form class="fade-in-up">
+                    <div class="mb-3">
+                        <label class="form-label" for="">Email address</label>
+                        <div class="input-icon"><i class="bi bi-envelope"></i>
+                            <input type="email" class="form-control"  placeholder="you@example.com">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="">Password</label>
+                        <div class="input-icon">
+                            <i class="bi bi-lock"></i>
+                            <input type="password" class="form-control" placeholder="••••••••">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-rb w-100 rb-pill">Login</button>
+                    <p class="text-center mt-3 mb-0 text-muted">New here?
+                        <a class="text-decoration-underline" role="button" (click)="isLoggedIn=false">
+                            Create an account
+                        </a>
+                    </p>
+                </form>
+                } @else {
+                <form class="fade-in-up">
+                    <div class="mb-3">
+                        <label class="form-label" for="">Email address</label>
+                        <div class="input-icon">
+                            <i class="bi bi-envelope"></i>
+                            <input type="email" class="form-control" name="emailId" [(ngModel)]="registerObj.emailId" placeholder="you@example.com">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="">User name</label>
+                        <div class="input-icon">
+                            <i class="bi bi-person"></i>
+                            <input type="text" class="form-control" name="userName" [(ngModel)]="registerObj.userName"
+                                placeholder="username">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="">Full name</label>
+                        <div class="input-icon">
+                            <i class="bi bi-card-text"></i>
+                            <input type="text" class="form-control" name="fullName" [(ngModel)]="registerObj.fullName"
+                                placeholder="Your name">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="">Password</label>
+                        <div class="input-icon">
+                            <i class="bi bi-lock"></i>
+                            <input type="password" class="form-control" name="password"
+                                [(ngModel)]="registerObj.password" placeholder="••••••••">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-rb w-100 rb-pill" (click)="register()">Register</button>
+                    <p class="text-center mt-3 mb-0 text-muted">
+                        Already have an account?
+                        <a class="text-decoration-underline" role="button" (click)="isLoggedIn=true">Login</a>
+                    </p>
+                </form>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary rb-pill" data-bs-dismiss="modal"
+                    (click)="openModal('close')">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

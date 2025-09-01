@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+// Global styles
+@import "bootstrap/scss/bootstrap";
+
+*,
+body,
+html {
+    color: black !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: none;
+}
+
+.search,
+.book-seat {
+    background-color: #d84e55 !important;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: white !important;
+    cursor: pointer;
+}

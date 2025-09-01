@@ -1,0 +1,58 @@
+:root {
+    --rb-red: #d84e55;
+    --rb-red-dark: #b63a40;
+    --rb-ink: #1f2937;
+}
+
+.modal-backdrop {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal-backdrop.show {
+    opacity: 0.5;
+    /* Adjust transparency */
+}
+
+.navbar-rb {
+    background: linear-gradient(90deg, #fff, #ffe9ea 55%, #fff);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    .nav-link {
+        font-weight: 600;
+        color: var(--rb-ink);
+        opacity: 0.9;
+        position: relative;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: var(--rb-red);
+
+            &::after {
+                width: 100%;
+            }
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            height: 2px;
+            width: 0;
+            background: var(--rb-red);
+            transition: width 0.2s ease;
+        }
+    }
+
+    .btn-ghost {
+        color: var(--rb-red);
+        border: 1px solid rgba(216, 78, 85, 0.25);
+        background: #fff;
+
+        &:hover {
+            background: rgba(216, 78, 85, 0.06);
+            border-color: var(--rb-red);
+            color: var(--rb-red-dark);
+        }
+    }
+}
