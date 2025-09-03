@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BusBooking, BusSchedule, LocationsResponse, Register, RegResponse } from '../Models/locationsData';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,12 @@ export class CommonService {
   private http = inject(HttpClient);
 
   getLocations():Observable<LocationsResponse[]> {
-    return this.http.get<LocationsResponse[]>("/api/BusBooking/GetBusLocations")
+    return this.http.get<LocationsResponse[]>(`${environment.apiUrl}/api/BusBooking/GetBusLocations`)
   }
 
   searchBus(from: string, to: string, date: string): Observable<BusSchedule[]> {
     // return this.http.get<BusSchedule[]>(ApiUrls.searchBus + `?fromLocation=${from}&toLocation=${to}&travelDate=${date}`)
-    return this.http.get<BusSchedule[]>("/api/BusBooking/searchBus", {
+    return this.http.get<BusSchedule[]>(`${environment.apiUrl}/api/BusBooking/searchBus`, {
       params: {
         fromLocation: from,
         toLocation: to,
@@ -26,7 +27,7 @@ export class CommonService {
   };
 
   getBusScheduleById(routeParam: string):Observable<BusSchedule> {
-    return this.http.get<BusSchedule>("/api/BusBooking/GetBusScheduleById", {
+    return this.http.get<BusSchedule>(`${environment.apiUrl}/api/BusBooking/GetBusScheduleById`, {
       params: {
         id: routeParam
       }
@@ -34,7 +35,7 @@ export class CommonService {
   }
 
   getBookedSeats(routeParam: string):Observable<number[]> {
-    return this.http.get<number[]>("/api/BusBooking/getBookedSeats", {
+    return this.http.get<number[]>(`${environment.apiUrl}/api/BusBooking/getBookedSeats`, {
       params: {
         scheduledId: routeParam
       }
@@ -42,10 +43,10 @@ export class CommonService {
   }
 
   registerUser(body: Register):Observable<RegResponse> {
-    return this.http.post<RegResponse>("/api/Complaint/AddNewUser", body)
+    return this.http.post<RegResponse>(`${environment.apiUrl}/api/Complaint/AddNewUser`, body)
   }
 
   postBooking(body: BusBooking):Observable<BusBooking> {
-    return this.http.post<BusBooking>("/api/BusBooking/PostBusBooking", body)
+    return this.http.post<BusBooking>(`${environment.apiUrl}/api/BusBooking/PostBusBooking`, body)
   }
 }
