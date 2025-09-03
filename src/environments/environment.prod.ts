@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://rahulbusbookingapp.netlify.app',
+  apiUrl: 'https://rahulbusbookingapp.netlify.app',
 };
