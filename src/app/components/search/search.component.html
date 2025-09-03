@@ -36,9 +36,9 @@
 
       <div class="col-12 col-md-3">
         <label class="form-label" for="">Date</label>
-        <div class="input-icon">
+        <div class="input-icon" tabindex="0" (click)="dateInput.showPicker()" (keyup)="dateInput.showPicker()">
           <i class="bi bi-calendar-event"></i>
-          <input type="date" class="form-control border-0 p-0" name="travelDate" [(ngModel)]="searchObj.travelDate">
+          <input type="date" #dateInput class="form-control border-0 p-0" name="travelDate" [(ngModel)]="searchObj.travelDate">
         </div>
       </div>
 
