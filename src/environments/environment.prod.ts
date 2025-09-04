@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://rahulbusbookingapp.netlify.app',
+  apiUrl: 'https://projectapi.gerasim.in',
 };
