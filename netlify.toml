@@ -6,6 +6,7 @@
   from = "/api/*"
   to = "https://projectapi.gerasim.in/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/*"
