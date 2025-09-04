@@ -2,6 +2,9 @@
   command = "ng build --configuration production"
   publish = "dist/book-bus-tickets/browser"
 
+[functions]
+  directory = "netlify/functions"
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api-proxy/:splat"

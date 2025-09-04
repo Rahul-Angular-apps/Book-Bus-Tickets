@@ -1,31 +1,25 @@
-export async function handler(event, context) {
-  const endpoint = event.path.replace('/api', ''); // Strip /api prefix
+export async function handler(event) {
+  const endpoint = event.path.replace('/.netlify/functions/api-proxy', '');
   const apiUrl = `https://projectapi.gerasim.in${endpoint}`;
 
   try {
     const response = await fetch(apiUrl, {
       method: event.httpMethod,
-      headers: {
-        ...event.headers,
-        host: undefined, // remove Netlify host
-      },
+      headers: { ...event.headers, host: undefined },
       body: event.body,
     });
 
-    const data = await response.text();
+    const text = await response.text();
 
     return {
       statusCode: response.status,
       headers: {
-        'Access-Control-Allow-Origin': '*', // Allow all origins
-        'Content-Type': response.headers.get('content-type') || 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       },
-      body: data,
+      body: text,
     };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
-    };
+  } catch (err) {
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
 }
