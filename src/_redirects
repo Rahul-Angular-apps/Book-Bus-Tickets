@@ -1,0 +1,2 @@
+/api/*     https://projectapi.gerasim.in/:splat    200
+/*         /index.html                             200
