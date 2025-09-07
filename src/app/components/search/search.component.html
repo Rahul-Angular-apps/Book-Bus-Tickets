@@ -12,9 +12,10 @@
         <label class="form-label" for="">From</label>
         <div class="input-icon">
           <i class="bi bi-geo-alt"></i>
-          <select class="form-select border-0 p-0" name="fromLocation" (click)="getBusLocations()" [(ngModel)]="searchObj.fromLocation">
+          <select class="form-select border-0 p-0" name="fromLocation" (click)="getBusLocations()"
+            [(ngModel)]="searchObj.fromLocation">
             <option value="" selected>From Location</option>
-            @for (item of locations$; track $index) {
+            @for (item of locations; track $index) {
             <option [value]="item.locationId">{{item.locationName}}</option>
             }
           </select>
@@ -25,9 +26,10 @@
         <label class="form-label" for="">To</label>
         <div class="input-icon">
           <i class="bi bi-geo"></i>
-          <select class="form-select border-0 p-0" name="toLocation" (click)="getBusLocations()" [(ngModel)]="searchObj.toLocation">
+          <select class="form-select border-0 p-0" name="toLocation" (click)="getBusLocations()"
+            [(ngModel)]="searchObj.toLocation">
             <option value="" selected>To Location</option>
-            @for (item of locations$; track $index) {
+            @for (item of locations; track $index) {
             <option [value]="item.locationId">{{item.locationName}}</option>
             }
           </select>
@@ -38,7 +40,8 @@
         <label class="form-label" for="">Date</label>
         <div class="input-icon" tabindex="0" (click)="dateInput.showPicker()" (keyup)="dateInput.showPicker()">
           <i class="bi bi-calendar-event"></i>
-          <input type="date" #dateInput class="form-control border-0 p-0" name="travelDate" [(ngModel)]="searchObj.travelDate">
+          <input type="date" #dateInput class="form-control border-0 p-0" name="travelDate"
+            [(ngModel)]="searchObj.travelDate">
         </div>
       </div>
 
@@ -98,3 +101,23 @@
     }
   </section>
 </section>
+
+<!-- Advertisement Popup -->
+<div class="position-fixed bottom-0 end-0 m-3 p-3 bg-white border rounded shadow fade" id="ad-popup"
+  style="width: 260px; z-index: 1050;" [@slideFade]="animationState">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <strong>Special Offers</strong>
+    <div class="btn-close no-focus pointer" tabindex="-1" (keyup)="closeAd()" (click)="closeAd()"></div>
+  </div>
+
+  <div>
+    <input type="text" class="form-control form-control-sm mb-2" [formControl]="searchProduct" placeholder="Search products...">
+    <ul class="list-group list-group-flush small">
+      @for (product of productsData; track $index) {
+        <li class="list-group-item p-1 pointer">
+          <div>{{product.title}}</div>
+        </li>
+      }
+    </ul>
+  </div>
+</div>

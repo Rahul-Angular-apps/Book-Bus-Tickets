@@ -1,5 +1,5 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { RegResponse } from '../../Models/locationsData';
+import { RegResponse } from '../../Models/commonModels';
 import { CommonService } from '../../services/common.service';
 import { FormsModule } from '@angular/forms';
 

@@ -13,4 +13,5 @@ export const ApiUrls = {
   GetBookedSeats: endPoint("/api/BusBooking/getBookedSeats"),
   register: endPoint("/api/Complaint/AddNewUser"),
   PostBusBooking: endPoint("/api/BusBooking/PostBusBooking"),
+  search: "https://dummyjson.com/products",
 };

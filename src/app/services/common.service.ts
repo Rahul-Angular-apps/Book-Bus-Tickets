@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BusBooking, BusSchedule, LocationsResponse, Register, RegResponse } from '../Models/locationsData';
+import { BusBooking, BusSchedule, LocationsResponse, ProductsResponse, Register, RegResponse } from '../Models/commonModels';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { ApiUrls } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,14 @@ import { environment } from '../../environments/environment';
 export class CommonService {
   
   private http = inject(HttpClient);
+
+  getProducts(search: string): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(`${ApiUrls.search}/search`, {
+      params: {
+        q: search
+      }
+    })
+  }
 
   getLocations():Observable<LocationsResponse[]> {
     return this.http.get<LocationsResponse[]>(`${environment.apiUrl}/BusBooking/GetBusLocations`)

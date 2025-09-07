@@ -23,3 +23,13 @@ html {
     color: white !important;
     cursor: pointer;
 }
+
+.pointer {
+    cursor: pointer;
+}
+
+.no-focus:focus {
+    outline: 0;
+    box-shadow: none;
+    opacity: 1;
+}

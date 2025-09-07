@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonService } from '../../services/common.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { BusBooking, BusSchedule, Passenger } from '../../Models/locationsData';
+import { BusBooking, BusSchedule, Passenger } from '../../Models/commonModels';
 import { FormsModule } from '@angular/forms';
 
 @Component({
