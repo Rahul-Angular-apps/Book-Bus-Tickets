@@ -52,7 +52,6 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.showAd();
-    this.fetchProducts();
   }
 
   fetchProducts(): void {
@@ -122,8 +121,16 @@ export class SearchComponent implements OnInit {
 
   closeAd():void {
     this.animationState = 'hidden';
+    this.resetSearch();
     this.showAd();
   };
+
+  resetSearch(): void {
+    this.searchProduct.setValue('');
+    this.productsData = [];
+    this.skip = 0;
+    this.total = 0;
+  }
 
   clearTimeForAdd():void {
     if (this.timer) {

@@ -112,7 +112,7 @@
 
   <div>
     <input type="text" class="form-control form-control-sm mb-2" [formControl]="searchProduct"
-      placeholder="Search products...">
+      placeholder="Search products..." (input)="fetchProducts()">
     @if (loading) {
       <div class="text-center mt-2">
         <i class="custom-loader spinner-border" style="color: #d84e55 !important"></i>
