@@ -12,10 +12,13 @@ export class CommonService {
   
   private http = inject(HttpClient);
 
-  getProducts(search: string): Observable<ProductsResponse> {
+  getProducts(search: string, skip: number, limit: number): Observable<ProductsResponse> {
     return this.http.get<ProductsResponse>(`${ApiUrls.search}/search`, {
       params: {
-        q: search
+        q: search,
+        skip: skip,
+        limit: limit,
+        select: 'title',
       }
     })
   }

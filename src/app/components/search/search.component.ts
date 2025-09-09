@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from "@angular/router";
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -38,6 +38,13 @@ export class SearchComponent implements OnInit {
   locations: LocationsResponse[] = []
   busScheduleData: BusSchedule[] = [];
   productsData: Product[] = [];
+  skip = 0;
+  limit = 10;
+  total = 0;
+  loading = false;
+  endReached = false;
+  loadMore = false;
+  searchValue = '';
   animationState: 'visible' | 'hidden' = 'hidden';
   private timer: ReturnType<typeof setTimeout> | null = null;
 
@@ -45,14 +52,64 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.showAd();
+    this.fetchProducts();
+  }
+
+  fetchProducts(): void {
     this.searchProduct.valueChanges.pipe(
-      debounceTime(1000),
+      debounceTime(500),
       distinctUntilChanged(),
-      filter((value: string) => value.trim().length > 3),
-      switchMap(value => this.service.getProducts(value)),
-      map(data => data.products)
-    ).subscribe(products => {
-      this.productsData = products
+      switchMap(value => {
+        this.searchValue = value.trim()
+        if (!value || value === '') {
+          this.productsData = [];
+          this.total = 0;
+          return of({ products: [], total: 0 });
+        }
+        this.loading = true;
+        this.skip = 0;
+        return this.service.getProducts(value.trim(), this.skip, this.limit)
+      }),
+      map(data => {
+        this.total = data.total
+        return data.products
+      })
+    ).subscribe({
+      next: (products) => {
+        this.productsData = products;
+        this.skip = this.limit;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.log('error while fetching the data', err);
+        this.productsData = [];
+        this.total = 0;
+        this.loading = false;
+      }
+    })
+  }
+
+  onScrollLoadData(e: Event): void {
+    const target = e.target as HTMLElement;
+    const distanceFromBottom = 30;
+    if (!this.loadMore && this.skip < this.total &&
+      target.scrollTop + target.clientHeight >= target.scrollHeight - distanceFromBottom
+    ) {
+      this.loadMoreData();
+    }
+  }
+
+  loadMoreData(): void {
+    this.loadMore = true;
+    this.service.getProducts(this.searchValue, this.skip, this.limit).subscribe({
+      next: (products) => {
+        this.loadMore = false;
+        this.productsData.push(...products.products);
+        this.skip += this.limit
+      },
+      error: (err) => {
+        console.log('Error while loading more data',  err);
+      }
     })
   }
 
@@ -60,7 +117,7 @@ export class SearchComponent implements OnInit {
     this.clearTimeForAdd();
     this.timer= setTimeout(() => {
       this.animationState = 'visible'
-    }, 2000)
+    }, 1500)
   }
 
   closeAd():void {

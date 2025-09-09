@@ -58,3 +58,33 @@
 .search {
   margin-top: 45px;
 }
+
+.product-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Scoped scroll */
+.products::-webkit-scrollbar {
+  width: 6px;
+}
+
+.products::-webkit-scrollbar-track {
+  background: #e0e0e0;
+  border-radius: 5px;
+}
+
+.products::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f5a5a2, #d84e55);
+  border-radius: 5px;
+}
+
+.products::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #d84e55, #f5a5a2);
+}
+.custom-loader {
+  --bs-spinner-width: 1rem;
+  --bs-spinner-height: 1rem;
+  --bs-spinner-border-width: 0.13em;
+  --bs-spinner-border-color: #d84e55 !important;
+}
