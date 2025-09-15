@@ -52,6 +52,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.showAd();
+    this.fetchProducts();
   }
 
   fetchProducts(): void {
