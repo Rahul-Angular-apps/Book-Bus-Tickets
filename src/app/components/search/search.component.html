@@ -125,7 +125,10 @@
       <ul class="list-group list-group-flush small overflow-y-scroll products" (scroll)="onScrollLoadData($event)"
         style="max-height: 172px;">
         @for (product of productsData; track $index) {
-          <li class="list-group-item p-1 pointer">
+          <li class="list-group-item p-1 pointer"
+           [routerLink]="['/products-info', product.id]"
+           [queryParams]="{title: product.title}"
+           >
             <div>{{product.title}}</div>
           </li>
         }

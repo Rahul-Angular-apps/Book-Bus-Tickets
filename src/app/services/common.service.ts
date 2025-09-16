@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BusBooking, BusSchedule, LocationsResponse, ProductsResponse, Register, RegResponse } from '../Models/commonModels';
+import { BusBooking, BusSchedule, LocationsResponse, ProductById, ProductsResponse, Register, RegResponse } from '../Models/commonModels';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ApiUrls } from '../constants';
@@ -21,6 +21,10 @@ export class CommonService {
         select: 'title',
       }
     })
+  }
+
+  getProductsById(id: string): Observable<ProductById> {
+    return this.http.get<ProductById>(`${ApiUrls.search}/${id}`)
   }
 
   getLocations():Observable<LocationsResponse[]> {
