@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject } from '@angular/core';
 import { CommonService } from '../../services/common.service';
 
 import { Product } from '../../Models/commonModels';
@@ -28,7 +28,7 @@ import { debounceTime, distinctUntilChanged, map, of, switchMap } from 'rxjs';
     ]),
   ],
 })
-export class ShowAdComponent implements OnInit {
+export class ShowAdComponent implements AfterViewInit {
   private service = inject(CommonService);
   private router = inject(Router)
 
@@ -45,7 +45,7 @@ export class ShowAdComponent implements OnInit {
 
   searchProduct: FormControl = new FormControl('');
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.showAd();
     this.fetchProducts();
   }
