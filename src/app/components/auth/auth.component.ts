@@ -1,5 +1,4 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { RegResponse } from '../../Models/commonModels';
 import { CommonService } from '../../services/common.service';
 import { FormsModule } from '@angular/forms';
 
@@ -15,7 +14,6 @@ export class AuthComponent {
   @ViewChild('modalOverlay') modalOverlay!: ElementRef;
   @ViewChild('rbNav') header!: ElementRef;
   isLoggedIn = true;
-  redUserData!: RegResponse;
 
   private service = inject(CommonService);
 
@@ -37,27 +35,7 @@ export class AuthComponent {
     this.header.nativeElement.classList.toggle('collapse');
   }
 
-  registerObj = {
-    userId: 0,
-    userName: '',
-    emailId: '',
-    fullName: '',
-    role: '',
-    createdDate: new Date(),
-    password: '',
-    projectName: '',
-    refreshToken: '',
-    refreshTokenExpiryTime: new Date(),
-  };
-
-  register() {
-    this.service.registerUser(this.registerObj).subscribe({
-      next: (res: RegResponse) => {
-        alert('Successfully registered');
-        localStorage.setItem('regUser', JSON.stringify(res.data));
-        this.redUserData = res;
-      },
-      error: (err) => console.log('error while reg', JSON.stringify(err)),
-    });
+  register():void {
+    console.log('user')
   }
 }

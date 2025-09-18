@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://projectapi.gerasim.in",
+    "target": "https://api.realworld.build",
     "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"

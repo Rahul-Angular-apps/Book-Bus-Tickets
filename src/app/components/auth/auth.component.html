@@ -87,31 +87,28 @@
                         <label class="form-label" for="">Email address</label>
                         <div class="input-icon">
                             <i class="bi bi-envelope"></i>
-                            <input type="email" class="form-control" name="emailId" [(ngModel)]="registerObj.emailId" placeholder="you@example.com">
+                            <input type="email" class="form-control" name="emailId" placeholder="you@example.com">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="">User name</label>
                         <div class="input-icon">
                             <i class="bi bi-person"></i>
-                            <input type="text" class="form-control" name="userName" [(ngModel)]="registerObj.userName"
-                                placeholder="username">
+                            <input type="text" class="form-control" name="userName" placeholder="username">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="">Full name</label>
                         <div class="input-icon">
                             <i class="bi bi-card-text"></i>
-                            <input type="text" class="form-control" name="fullName" [(ngModel)]="registerObj.fullName"
-                                placeholder="Your name">
+                            <input type="text" class="form-control" name="fullName" placeholder="Your name">
                         </div>
                     </div>
                     <div class="mb-4">
                         <label class="form-label" for="">Password</label>
                         <div class="input-icon">
                             <i class="bi bi-lock"></i>
-                            <input type="password" class="form-control" name="password"
-                                [(ngModel)]="registerObj.password" placeholder="••••••••">
+                            <input type="password" class="form-control" name="password" placeholder="••••••••">
                         </div>
                     </div>
                     <button type="button" class="btn btn-rb w-100 rb-pill register" (click)="register()">Register</button>

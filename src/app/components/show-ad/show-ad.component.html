@@ -1,0 +1,36 @@
+<!-- Advertisement Popup -->
+<div class="position-fixed top-50 end-0 m-3 p-3 bg-white border rounded shadow fade" id="ad-popup"
+    style="width: 260px; z-index: 1050;" [@slideFade]="animationState">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <strong>Special Offers</strong>
+        <div class="btn-close no-focus pointer w-auto" tabindex="-1" (keyup)="closeAd()" (click)="closeAd()"></div>
+    </div>
+
+    <div>
+        <input type="text" class="form-control form-control-sm mb-2" [formControl]="searchProduct"
+            placeholder="Search products...">
+        @if (loading) {
+        <div class="text-center mt-2">
+            <i class="custom-loader spinner-border" style="color: #d84e55 !important"></i>
+        </div>
+        }
+        @if (!loading && searchProduct.value?.trim() && productsData.length === 0) {
+        <div class="text-center text-muted small py-1">No products found</div>
+        }
+        <div>
+            <ul class="list-group list-group-flush small overflow-y-scroll products" (scroll)="onScrollLoadData($event)"
+                style="max-height: 172px;">
+                @for (product of productsData; track $index) {
+                <li class="list-group-item p-1 pointer" tabindex="-1" (keyup)="productDetails(product)" (click)="productDetails(product)">
+                    <div>{{product.title}}</div>
+                </li>
+                }
+            </ul>
+        </div>
+        @if (loadMore) {
+        <div class="text-center mt-2">
+            <i class="custom-loader spinner-border" style="color: #d84e55 !important"></i>
+        </div>
+        }
+    </div>
+</div>
