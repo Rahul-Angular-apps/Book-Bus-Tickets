@@ -1,11 +1,12 @@
-import { environment } from './environments/environment';
+const realWorld = "https://api.realworld.build/api";
+const dummyJson = "https://dummyjson.com"
 
-function realWorld(path: string): string {
-  return `${environment.api}${path}`;
-}
+// function endPoint(path: string): string {
+//   return `${environment.api}${path}`;
+// }
 
 export const ApiUrls = {
-  register: realWorld('/users'),
-  search: `${environment.products}/search`,
-  productById: environment.products,
+  register: `${realWorld}/users`,
+  search: `${dummyJson}/search`,
+  productById: `${dummyJson}/products`,
 };
