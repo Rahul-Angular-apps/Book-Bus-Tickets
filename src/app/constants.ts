@@ -7,6 +7,6 @@ const dummyJson = "https://dummyjson.com"
 
 export const ApiUrls = {
   register: `${realWorld}/users`,
-  search: `${dummyJson}/search`,
+  search: `${dummyJson}/products/search`,
   productById: `${dummyJson}/products`,
 };
