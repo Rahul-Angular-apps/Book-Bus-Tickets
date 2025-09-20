@@ -1,21 +1,32 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonService } from '../../services/common.service';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
   @ViewChild('modal') myModal!: ElementRef;
   @ViewChild('modalOverlay') modalOverlay!: ElementRef;
   @ViewChild('rbNav') header!: ElementRef;
   isLoggedIn = true;
 
+  register!:FormGroup
+
   private service = inject(CommonService);
+  private fb = inject(FormBuilder);
+
+  ngOnInit(): void {
+    this.register = this.fb.group({
+      emailId: ['', Validators.required],
+      fullName: ['', Validators.required],
+      password: ['', Validators.required]
+    })
+  }
 
   openModal(mode: string): void {
     if (mode === 'open') {
@@ -35,7 +46,9 @@ export class AuthComponent {
     this.header.nativeElement.classList.toggle('collapse');
   }
 
-  register():void {
-    console.log('user')
+  onRegister():void {
+    this.service.onRegistration(this.register.value).pipe().subscribe(data => {
+      console.log(data)
+    })
   }
 }

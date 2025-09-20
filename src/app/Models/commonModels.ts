@@ -52,3 +52,16 @@ export interface Review {
   reviewerName: string;
   reviewerEmail: string;
 }
+
+export interface RegisterPayload {
+  email: string;
+  username: string;
+  password: string;
+}
+
+export interface RegistrationResponse {
+  id: number;
+  email: string;
+  username: string;
+  password: string;
+}

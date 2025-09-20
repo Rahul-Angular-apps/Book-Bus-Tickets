@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ProductById, ProductsResponse } from '../Models/commonModels';
+import { ProductById, ProductsResponse, RegisterPayload, RegistrationResponse } from '../Models/commonModels';
 import { Observable } from 'rxjs';
 import { ApiUrls } from '../constants';
 
@@ -24,5 +24,11 @@ export class CommonService {
 
   getProductsById(id: string): Observable<ProductById> {
     return this.http.get<ProductById>(`${ApiUrls.productById}/${id}`)
+  }
+
+  onRegistration(reqBody:RegisterPayload) {
+    return this.http.post<RegistrationResponse>(ApiUrls.register, reqBody, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 }

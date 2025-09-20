@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-rb py-3">
+<nav class="navbar navbar-expand-md navbar-rb py-3">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2">
             <img src="assets/images/travel-bus.png" alt="travelBus"
@@ -41,7 +41,7 @@
                 <li class="nav-item ms-lg-3">
                     <button class="btn btn-ghost rb-pill px-3 d-flex align-items-center gap-2"
                         (click)="openModal('open')">
-                        <i class="bi bi-person"></i> Login / Sign up
+                        <i class="bi bi-person"></i> Login
                     </button>
                 </li>
             </ul>
@@ -64,14 +64,14 @@
                     <div class="mb-3">
                         <label class="form-label" for="">Email address</label>
                         <div class="input-icon"><i class="bi bi-envelope"></i>
-                            <input type="email" class="form-control"  placeholder="you@example.com">
+                            <input type="email" class="form-control" autocomplete="off" placeholder="you@example.com">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="">Password</label>
                         <div class="input-icon">
                             <i class="bi bi-lock"></i>
-                            <input type="password" class="form-control" placeholder="••••••••">
+                            <input type="password" class="form-control" autocomplete="off" placeholder="••••••••">
                         </div>
                     </div>
                     <button type="button" class="btn btn-rb w-100 rb-pill login">Login</button>
@@ -82,36 +82,29 @@
                     </p>
                 </form>
                 } @else {
-                <form class="fade-in-up">
+                <form class="fade-in-up" [formGroup]="register" (ngSubmit)="onRegister()">
                     <div class="mb-3">
                         <label class="form-label" for="">Email address</label>
                         <div class="input-icon">
                             <i class="bi bi-envelope"></i>
-                            <input type="email" class="form-control" name="emailId" placeholder="you@example.com">
+                            <input type="email" class="form-control" formControlName="emailId" autocomplete="off" placeholder="you@example.com">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="">User name</label>
                         <div class="input-icon">
                             <i class="bi bi-person"></i>
-                            <input type="text" class="form-control" name="userName" placeholder="username">
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="">Full name</label>
-                        <div class="input-icon">
-                            <i class="bi bi-card-text"></i>
-                            <input type="text" class="form-control" name="fullName" placeholder="Your name">
+                            <input type="text" class="form-control" formControlName="fullName" autocomplete="off" placeholder="username">
                         </div>
                     </div>
                     <div class="mb-4">
                         <label class="form-label" for="">Password</label>
                         <div class="input-icon">
                             <i class="bi bi-lock"></i>
-                            <input type="password" class="form-control" name="password" placeholder="••••••••">
+                            <input type="password" class="form-control" formControlName="password" autocomplete="off" autocomplete="off" placeholder="••••••••">
                         </div>
                     </div>
-                    <button type="button" class="btn btn-rb w-100 rb-pill register" (click)="register()">Register</button>
+                    <button type="submit" class="btn btn-rb w-100 rb-pill register">Register</button>
                     <p class="text-center mt-3 mb-0 text-muted">
                         Already have an account?
                         <a class="text-decoration-underline" role="button" (click)="isLoggedIn=true">Login</a>
