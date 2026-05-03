@@ -22,9 +22,10 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     this.register = this.fb.group({
-      emailId: ['', Validators.required],
-      fullName: ['', Validators.required],
-      password: ['', Validators.required]
+      emailId: ['', [Validators.required, Validators.email]],
+      fullName: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
     })
   }
 
@@ -47,8 +48,12 @@ export class AuthComponent implements OnInit {
   }
 
   onRegister():void {
-    this.service.onRegistration(this.register.value).pipe().subscribe(data => {
-      console.log(data)
-    })
+    if (this.register.valid) {
+      this.service.onRegistration(this.register.value).pipe().subscribe(data => {
+        console.log(data)
+      })
+    } else {
+      this.register.markAllAsTouched()
+    }
   }
 }
