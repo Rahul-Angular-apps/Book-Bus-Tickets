@@ -1,36 +1,33 @@
 <!-- Advertisement Popup -->
-<div class="position-fixed top-50 end-0 m-3 p-3 bg-white border rounded shadow fade" id="ad-popup"
-     [@slideFade]="animationState">
-    <div class="d-flex justify-content-between align-items-center mb-2">
+<div id="ad-popup" class="fixed right-4 top-1/2 transform -translate-y-1/2 m-3 p-3 bg-white border rounded shadow" [@slideFade]="animationState">
+    <div class="flex justify-between items-center mb-2">
         <strong>Special Offers</strong>
-        <div class="btn-close no-focus pointer w-auto" tabindex="-1" (keyup)="closeAd()" (click)="closeAd()"></div>
+        <div class="cursor-pointer w-auto" tabindex="-1" (keyup)="closeAd()" (click)="closeAd()">×</div>
     </div>
 
     <div>
-        <input type="text" class="form-control form-control-sm mb-2" [formControl]="searchProduct"
-            placeholder="Search products...">
+        <input type="text" class="border rounded px-2 py-1 text-sm mb-2 w-full" [formControl]="searchProduct" placeholder="Search products...">
         @if (loading) {
-        <div class="text-center mt-2">
-            <i class="custom-loader spinner-border" style="color: #d84e55 !important"></i>
-        </div>
+            <div class="text-center mt-2">
+                <div class="animate-spin inline-block w-6 h-6 border-2 border-red-600 border-t-transparent rounded-full"></div>
+            </div>
         }
         @if (!loading && searchProduct.value?.trim() && productsData.length === 0) {
-        <div class="text-center text-muted small py-1">No products found</div>
+            <div class="text-center text-gray-500 text-sm py-1">No products found</div>
         }
         <div>
-            <ul class="list-group list-group-flush small overflow-y-scroll products" (scroll)="onScrollLoadData($event)"
-                style="max-height: 172px;">
+            <ul class="text-sm overflow-y-auto products" (scroll)="onScrollLoadData($event)" style="max-height: 172px;">
                 @for (product of productsData; track $index) {
-                <li class="list-group-item p-1 pointer" tabindex="-1" (keyup)="productDetails(product)" (click)="productDetails(product)">
-                    <div>{{product.title}}</div>
-                </li>
+                    <li class="p-1 cursor-pointer" tabindex="-1" (keyup)="productDetails(product)" (click)="productDetails(product)">
+                        <div>{{product.title}}</div>
+                    </li>
                 }
             </ul>
         </div>
         @if (loadMore) {
-        <div class="text-center mt-2">
-            <i class="custom-loader spinner-border" style="color: #d84e55 !important"></i>
-        </div>
+            <div class="text-center mt-2">
+                <div class="animate-spin inline-block w-6 h-6 border-2 border-red-600 border-t-transparent rounded-full"></div>
+            </div>
         }
     </div>
 </div>

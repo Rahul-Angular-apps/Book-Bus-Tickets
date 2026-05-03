@@ -6,6 +6,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+## Tailwind CSS
+
+This project was migrated from Bootstrap to Tailwind CSS. Tailwind is wired through PostCSS so no extra build steps are needed beyond the normal Angular build.
+
+After pulling these changes run:
+
+	npm install
+	npm run start
+
+If you need to rebuild assets for production use `ng build --configuration production`.
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

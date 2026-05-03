@@ -1,84 +1,82 @@
-<nav class="navbar navbar-expand-md navbar-rb py-3">
-    <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-2">
-            <img src="assets/images/travel-bus.png" alt="travelBus"
-                style="width:84px;height:auto;">
-            <!-- <span class="fw-bold text-danger">travel<span class="text-dark">Bus</span></span> -->
-        </a>
+<nav class="py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+            <a class="flex items-center gap-2">
+                <img src="assets/images/travel-bus.png" alt="travelBus" class="w-20 h-auto">
+            </a>
 
-        <button class="navbar-toggler" type="button" (click)="toggleNav()" data-bs-toggle="collapse"
-            data-bs-target="#rbNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <div class="lg:hidden">
+                <button type="button" (click)="toggleNav()" class="p-2 rounded-md focus:outline-none">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
 
-        <div class="collapse navbar-collapse" #rbNav id="rbNav">
-            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2">
-                        <i class="bi bi-bus-front"></i>
-                        Buses
-                    </a>
+            <div #rbNav class="hidden lg:flex lg:items-center lg:gap-4">
+                <ul class="flex items-center gap-4">
+                    <li>
+                        <a class="flex items-center gap-2">
+                            <i class="bi bi-bus-front"></i>
+                            Buses
+                        </a>
                     </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2">
-                        <i class="bi bi-train-front"></i>
-                        Trains
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2">
-                        <i class="bi bi-airplane"></i>
-                        Flights
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2">
-                        <i class="bi bi-building"></i>
-                        Hotels
-                    </a>
-                </li>
-
-                <li class="nav-item ms-lg-3">
-                    <button class="btn btn-ghost rb-pill px-3 d-flex align-items-center gap-2"
-                        (click)="openModal('open')">
-                        <i class="bi bi-person"></i> Login
-                    </button>
-                </li>
-            </ul>
+                    <li>
+                        <a class="flex items-center gap-2">
+                            <i class="bi bi-train-front"></i>
+                            Trains
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center gap-2">
+                            <i class="bi bi-airplane"></i>
+                            Flights
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center gap-2">
+                            <i class="bi bi-building"></i>
+                            Hotels
+                        </a>
+                    </li>
+                    <li>
+                        <button class="flex items-center gap-2 px-3 py-1 rounded-full bg-red-600 text-white" (click)="openModal('open')">
+                            <i class="bi bi-person"></i> Login
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
 
 <!-- Auth Modal -->
-<div #modalOverlay class="modal-backdrop fade" style="display: none;"></div>
-<div class="modal fade" id="rbAuth" #modal tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rb-card">
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold text-danger">Welcome back</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="openModal('close')"></button>
+<div #modalOverlay class="fixed inset-0 bg-black bg-opacity-50 hidden" style="display: none;"></div>
+<div id="rbAuth" #modal class="fixed inset-0 flex items-center justify-center p-4 hidden" tabindex="-1" aria-hidden="true">
+    <div class="max-w-lg w-full">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-4 py-3 border-b">
+                <h5 class="font-bold text-red-600">Welcome back</h5>
+                <button type="button" class="absolute top-3 right-3 text-gray-500" (click)="openModal('close')">×</button>
             </div>
-            <div class="modal-body">
+            <div class="p-4">
                 @if (isLoggedIn) {
                 <form class="fade-in-up">
                     <div class="mb-3">
                         <label class="form-label" for="">Email address</label>
                         <div class="input-icon"><i class="bi bi-envelope"></i>
-                            <input type="email" class="form-control" autocomplete="off" placeholder="you@example.com">
+                            <input type="email" class="border rounded px-2 py-1 w-full" autocomplete="off" placeholder="you@example.com">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="">Password</label>
                         <div class="input-icon">
                             <i class="bi bi-lock"></i>
-                            <input type="password" class="form-control" autocomplete="off" placeholder="••••••••">
+                            <input type="password" class="border rounded px-2 py-1 w-full" autocomplete="off" placeholder="••••••••">
                         </div>
                     </div>
-                    <button type="button" class="btn btn-rb w-100 rb-pill login">Login</button>
-                    <p class="text-center mt-3 mb-0 text-muted">New here?
-                        <a class="text-decoration-underline" role="button" (click)="isLoggedIn=false">
-                            Create an account
-                        </a>
+                    <button type="button" class="w-full bg-red-600 text-white py-2 rounded-md login">Login</button>
+                    <p class="text-center mt-3 mb-0 text-gray-500">New here?
+                        <a class="underline cursor-pointer" role="button" (click)="isLoggedIn=false">Create an account</a>
                     </p>
                 </form>
                 } @else {
@@ -87,41 +85,39 @@
                         <label class="form-label" for="">Email address</label>
                         <div class="input-icon">
                             <i class="bi bi-envelope"></i>
-                            <input type="email" class="form-control" formControlName="emailId" autocomplete="off" placeholder="you@example.com">
+                            <input type="email" class="border rounded px-2 py-1 w-full" formControlName="emailId" autocomplete="off" placeholder="you@example.com">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="">User name</label>
                         <div class="input-icon">
                             <i class="bi bi-person"></i>
-                            <input type="text" class="form-control" formControlName="fullName" autocomplete="off" placeholder="username">
+                            <input type="text" class="border rounded px-2 py-1 w-full" formControlName="fullName" autocomplete="off" placeholder="username">
                         </div>
                     </div>
                     <div class="mb-4">
                         <label class="form-label" for="">Password</label>
                         <div class="input-icon">
                             <i class="bi bi-lock"></i>
-                            <input type="password" class="form-control" formControlName="password" autocomplete="off" autocomplete="off" placeholder="••••••••">
+                            <input type="password" class="border rounded px-2 py-1 w-full" formControlName="password" autocomplete="off" placeholder="••••••••">
                         </div>
                     </div>
                     <div class="mb-4">
                         <label class="form-label" for="">Password</label>
                         <div class="input-icon">
                             <i class="bi bi-lock"></i>
-                            <input type="password" class="form-control" formControlName="confirmPassword" autocomplete="off" autocomplete="off" placeholder="••••••••">
+                            <input type="password" class="border rounded px-2 py-1 w-full" formControlName="confirmPassword" autocomplete="off" placeholder="••••••••">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-rb w-100 rb-pill register">Register</button>
-                    <p class="text-center mt-3 mb-0 text-muted">
-                        Already have an account?
-                        <a class="text-decoration-underline" role="button" (click)="isLoggedIn=true">Login</a>
+                    <button type="submit" class="w-full bg-red-600 text-white py-2 rounded-md register">Register</button>
+                    <p class="text-center mt-3 mb-0 text-gray-500">Already have an account?
+                        <a class="underline cursor-pointer" role="button" (click)="isLoggedIn=true">Login</a>
                     </p>
                 </form>
                 }
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary rb-pill" data-bs-dismiss="modal"
-                    (click)="openModal('close')">Close</button>
+            <div class="px-4 py-3 border-t text-right">
+                <button type="button" class="px-4 py-2 rounded-md border" (click)="openModal('close')">Close</button>
             </div>
         </div>
     </div>

@@ -1,49 +1,44 @@
 
 @if (loading) {
-  <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
-    <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem;">
-      <span class="visually-hidden">Loading...</span>
-    </div>
+  <div class="flex justify-center items-center" style="height: 300px;">
+    <div class="animate-spin inline-block w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full" role="status"></div>
   </div>
 }
 
 @if (!loading && productsDataById) {
-<div class="container my-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card shadow-sm">
-        <img [src]="productsDataById.thumbnail" class="card-img-top w-50 m-auto" alt="{{productsDataById.title}}">
-        <div class="card-body">
-          <h3 class="card-title mb-2">{{productsDataById.title}}</h3>
-          <span class="badge bg-primary">{{productsDataById.category}}</span>
-          <p class="card-text mt-3">{{productsDataById.description}}</p>
-          <ul class="list-group list-group-flush mb-3">
-            <li class="list-group-item"><strong>Brand:</strong> {{productsDataById.brand}}</li>
-            <li class="list-group-item">
-              <strong>Price:</strong> <span class="text-success">₹{{productsDataById.price}}</span>
+<div class="max-w-5xl mx-auto my-12 px-4">
+  <div class="flex justify-center">
+    <div class="w-full md:w-3/4">
+      <div class="bg-white shadow-sm rounded-md overflow-hidden">
+        <img [src]="productsDataById.thumbnail" class="w-1/2 mx-auto" alt="{{productsDataById.title}}">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold mb-2">{{productsDataById.title}}</h3>
+          <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">{{productsDataById.category}}</span>
+          <p class="mt-3 text-gray-700">{{productsDataById.description}}</p>
+          <ul class="mb-3 divide-y">
+            <li class="py-2"><strong>Brand:</strong> {{productsDataById.brand}}</li>
+            <li class="py-2">
+              <strong>Price:</strong> <span class="text-green-600">₹{{productsDataById.price}}</span>
               @if (productsDataById.discountPercentage > 0) {
-              <span class="ms-2 badge bg-warning text-dark">-{{productsDataById.discountPercentage}}%</span>
+                <span class="ml-2 inline-block bg-yellow-300 text-yellow-900 text-xs px-2 py-1 rounded">-{{productsDataById.discountPercentage}}%</span>
               }
             </li>
-            <li class="list-group-item"><strong>Rating:</strong> {{productsDataById.rating}} / 5</li>
-            <li class="list-group-item"><strong>Stock:</strong> {{productsDataById.stock}} units</li>
-            <li class="list-group-item"><strong>SKU:</strong> {{productsDataById.sku}}</li>
-            <li class="list-group-item"><strong>Tags:</strong>
+            <li class="py-2"><strong>Rating:</strong> {{productsDataById.rating}} / 5</li>
+            <li class="py-2"><strong>Stock:</strong> {{productsDataById.stock}} units</li>
+            <li class="py-2"><strong>SKU:</strong> {{productsDataById.sku}}</li>
+            <li class="py-2"><strong>Tags:</strong>
               @for (tag of productsDataById.tags; track $index) {
-              <span class="badge bg-info me-1">{{tag}}</span>
+                <span class="inline-block bg-teal-200 text-teal-800 text-xs px-2 py-1 rounded mr-1">{{tag}}</span>
               }
             </li>
           </ul>
-          <div class="row mb-3">
-            <div class="col-sm-4"><strong>Dimensions:</strong><br>
-              W: {{productsDataById.dimensions.width}},
-              H: {{productsDataById.dimensions.height}},
-              D: {{productsDataById.dimensions.depth}}
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-3">
+            <div><strong>Dimensions:</strong><br>
+              W: {{productsDataById.dimensions.width}}, H: {{productsDataById.dimensions.height}}, D: {{productsDataById.dimensions.depth}}
             </div>
-            <div class="col-sm-4"><strong>Weight:</strong> {{productsDataById.weight}}g</div>
-            <div class="col-sm-4"><strong>Availability:</strong>
-              <span [class.text-success]="productsDataById.availabilityStatus==='In Stock'"
-                [class.text-danger]="productsDataById.availabilityStatus!=='In Stock'">
+            <div><strong>Weight:</strong> {{productsDataById.weight}}g</div>
+            <div><strong>Availability:</strong>
+              <span [class.text-green-600]="productsDataById.availabilityStatus==='In Stock'" [class.text-red-600]="productsDataById.availabilityStatus!=='In Stock'">
                 {{productsDataById.availabilityStatus}}
               </span>
             </div>
@@ -57,21 +52,21 @@
           </div>
           <div>
             <strong>Barcode:</strong> {{productsDataById.meta.barcode}}
-            <img [src]="productsDataById.meta.qrCode" alt="QR Code" width="50" class="ms-2">
+            <img [src]="productsDataById.meta.qrCode" alt="QR Code" width="50" class="ml-2">
           </div>
         </div>
       </div>
 
-      <div class="card mt-4">
-        <div class="card-header">
-          <h5>Customer Reviews</h5>
+      <div class="bg-white mt-4 rounded-md shadow-sm">
+        <div class="p-4 border-b">
+          <h5 class="font-semibold">Customer Reviews</h5>
         </div>
-        <ul class="list-group list-group-flush">
+        <ul>
           @for (review of productsDataById.reviews; track $index) {
-          <li class="list-group-item">
-            <strong>{{review.reviewerName}}</strong> ({{review.rating}} / 5) - <small>{{review.date}}</small>
-            <p>{{review.comment}}</p>
-          </li>
+            <li class="p-4 border-b">
+              <strong>{{review.reviewerName}}</strong> ({{review.rating}} / 5) - <small>{{review.date}}</small>
+              <p>{{review.comment}}</p>
+            </li>
           }
         </ul>
       </div>

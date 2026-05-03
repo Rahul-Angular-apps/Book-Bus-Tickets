@@ -31,20 +31,25 @@ export class AuthComponent implements OnInit {
 
   openModal(mode: string): void {
     if (mode === 'open') {
-      this.myModal.nativeElement.classList.remove('fade');
-      this.myModal.nativeElement.classList.add('d-block');
-      this.modalOverlay.nativeElement.classList.add('show');
+      // show modal (Tailwind): remove hidden, set block
+      this.myModal.nativeElement.classList.remove('hidden');
+      this.myModal.nativeElement.classList.add('block');
+      this.modalOverlay.nativeElement.classList.remove('hidden');
+      this.modalOverlay.nativeElement.classList.add('block');
       this.modalOverlay.nativeElement.style.display = 'block';
     } else if (mode === 'close') {
-      this.myModal.nativeElement.classList.add('fade');
-      this.myModal.nativeElement.classList.remove('d-block');
-      this.modalOverlay.nativeElement.classList.remove('show');
+      // hide modal
+      this.myModal.nativeElement.classList.add('hidden');
+      this.myModal.nativeElement.classList.remove('block');
+      this.modalOverlay.nativeElement.classList.add('hidden');
+      this.modalOverlay.nativeElement.classList.remove('block');
       this.modalOverlay.nativeElement.style.display = 'none';
     }
   }
 
   toggleNav() {
-    this.header.nativeElement.classList.toggle('collapse');
+    // toggle Tailwind responsive menu: toggle hidden class
+    this.header.nativeElement.classList.toggle('hidden');
   }
 
   onRegister():void {
